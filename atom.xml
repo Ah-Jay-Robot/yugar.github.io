@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jermyhunter.github.io</id>
     <title>Gridea</title>
-    <updated>2021-04-02T20:25:16.276Z</updated>
+    <updated>2021-04-02T20:30:17.406Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jermyhunter.github.io"/>
     <link rel="self" href="https://jermyhunter.github.io/atom.xml"/>
@@ -10,6 +10,720 @@
     <logo>https://jermyhunter.github.io/images/avatar.png</logo>
     <icon>https://jermyhunter.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[Unity | Slider 环形血条效果制作]]></title>
+        <id>https://jermyhunter.github.io/post/Unity  Slider 环形血条效果制作/</id>
+        <link href="https://jermyhunter.github.io/post/Unity  Slider 环形血条效果制作/">
+        </link>
+        <updated>2020-05-07T04:21:58.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="创建-slider">创建 Slider</h2>
+<p>创建 <code>slider</code></p>
+<p>设置 <code>canvas</code> 的 <code>Render mdoe</code> 为 <code>world space</code> / 或者为 <code>not important</code></p>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/05/07/CXPcmaQ71EVYxbU.png" alt="设置 Canvas 的渲染模式为 not important" loading="lazy"></figure>
+<p>删除 <code>handle slider area</code></p>
+<figure data-type="image" tabindex="2"><img src="https://i.loli.net/2020/05/07/CFcjMsoUDJiduWL.png" alt="Slider对象的层级结构" loading="lazy"></figure>
+<p>这时候，如果修改 <code>Slider</code> 的 <code>value</code>，你会发现有进度条的效果出现</p>
+<hr>
+<h2 id="环形效果">环形效果</h2>
+<p>设置 <code>background</code> 和 <code>fill</code></p>
+<ul>
+<li><code>source img</code> 加载环形 <code>sprite</code><br>
+（导入图片时，需要修改导入图片的属性，转为 <code>sprite</code>，再点击 <code>Apply</code>，这样才能够使用）</li>
+</ul>
+<figure data-type="image" tabindex="3"><img src="https://i.loli.net/2020/05/07/rzFTYwKd76j2pOC.png" alt="image-20200403142411268" loading="lazy"></figure>
+<hr>
+<h3 id="修改-slider-的-rect-组件">修改 slider 的 Rect 组件</h3>
+<p>设置 <code>slider</code> 的 <code>width</code> <code>height</code></p>
+<p>将 <code>canvas</code> 下的所有对象（包括子对象）的锚点都设置为 <code>stretch</code><br>
+在锚点设置中，按住 <code>Alt</code> 点击最右下角的预置方式即可</p>
+<figure data-type="image" tabindex="4"><img src="https://i.loli.net/2020/05/07/CvNnOkXK4MythSQ.png" alt="按住 Alt，再点击最右下角的锚点布局" loading="lazy"></figure>
+<p>修改后的效果，已经有环形血条的效果了</p>
+<figure data-type="image" tabindex="5"><img src="https://i.loli.net/2020/05/07/KDe2miS8kp4EPfU.png" alt="血条的环形效果" loading="lazy"></figure>
+<hr>
+<h3 id="设置颜色">设置颜色</h3>
+<p>设置颜色</p>
+<p><code>background</code> 设置红色的背景色</p>
+<figure data-type="image" tabindex="6"><img src="https://i.loli.net/2020/05/07/CMwU5f3y4cvAzLa.png" alt="设置红色背景" loading="lazy"></figure>
+<p><code>fill</code>  设置填充的前景色，设置为绿色</p>
+<figure data-type="image" tabindex="7"><img src="https://i.loli.net/2020/05/07/3JqB6ydWF1AuxbY.png" alt="fill 设置为绿色" loading="lazy"></figure>
+<p>可以加上一点透明度，看起来更舒适</p>
+<hr>
+<p>但是这时候如果调整 <code>Slider</code> 的 <code>Value</code> 值，你会发现血条并不是以预期的状态填充</p>
+<hr>
+<h3 id="修改图片类型">修改图片类型</h3>
+<p>将 <code>image type</code> 改为 <code>filled</code> ，<code>Fill Method</code> 设置为 <code>Radial 360</code>，调整 <code>fill amount</code> 查看效果<br>
+（<code>Fill Origin</code> 控制初始的填充点位置，<code>Clockwise</code> 调整填充的方向，其他效果可以自行探索）</p>
+<figure data-type="image" tabindex="8"><img src="https://i.loli.net/2020/05/07/An4pi1ZIhXFUwQ9.png" alt="修改 Fill 的图片类型" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="https://i.loli.net/2020/05/07/YCfEItZTA4vPMHO.png" alt="修改后的效果" loading="lazy"></figure>
+<hr>
+<h2 id="挂载到物体上">挂载到物体上</h2>
+<p>在 <code>Hierarchy</code> 视图中，将 <code>canvas</code> 拖动到角色 <code>cube</code> 下，设置位置坐标都为 0<br>
+修改 <code>Y</code> 坐标，调整垂直方向的位置</p>
+<figure data-type="image" tabindex="10"><img src="https://i.loli.net/2020/05/07/1Z8kVFISlvxsyut.png" alt="完成后的效果" loading="lazy"></figure>
+<hr>
+<h2 id="脚本交互">脚本交互</h2>
+<p><code>Slider</code> 的 <code>Max Value</code> 和 <code>Min Value</code> 控制血条的前景长度<br>
+在脚本中，只需要获取 <code>Slider</code> 后，修改 <code>Slider.value</code> 属性即可</p>
+<figure data-type="image" tabindex="11"><img src="https://i.loli.net/2020/05/07/FIg4veba57zusKM.png" alt="Max Value 和 Min Value 控制 Slider 的填充范围" loading="lazy"></figure>
+<hr>
+<h1 id="小结">小结</h1>
+<ul>
+<li>
+<p>环形血条由于是在整个3D空间范围内存在的，非 2D，所以需要使用 World Space 这种 3D 分布方式</p>
+</li>
+<li>
+<p>画布 <code>Canvas</code></p>
+<ul>
+<li>画布 <code>Canvas</code> 相当于需要显示血条对象的一个附属组件（*****任何 UI 对象在离开 <code>Canvas</code> 后都无法独立存活）</li>
+<li>将画布的所有子对象的锚点设置在四个最外的边界，保证修改 <code>Canvas</code> 的大小时，其子对象也会随之一起变化</li>
+</ul>
+</li>
+<li>
+<p>制作的血条形状与 <code>background</code> 和 <code>fill</code> 对象的 <code>image</code> 组件的 <code>source image</code> 属性有着密切的关系，血条的形状取决于它</p>
+</li>
+<li>
+<p><code>fill</code> 的图片类型决定了血条的填充效果</p>
+</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Unity | UI - Canvas - Render Mode 的三种模式]]></title>
+        <id>https://jermyhunter.github.io/post/Unity  UI - Canvas - Render Mode 的三种模式/</id>
+        <link href="https://jermyhunter.github.io/post/Unity  UI - Canvas - Render Mode 的三种模式/">
+        </link>
+        <updated>2020-05-07T04:14:38.000Z</updated>
+        <content type="html"><![CDATA[<p>每个GUI控件都是画布的子对象<br>
+（添加控件时，GUI会自动创建画布）</p>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/05/07/FfBkDGrsbMVJEcd.png" alt="Render mode" loading="lazy"></figure>
+<h2 id="screen-space-overlay">Screen Space - Overlay</h2>
+<p>UI元素置于屏幕上方<br>
+画布自动适应屏幕尺寸改变</p>
+<figure data-type="image" tabindex="2"><img src="https://i.loli.net/2020/05/07/ZEg6SsnhuTfedvD.png" alt="Overlay 重叠" loading="lazy"></figure>
+<h2 id="screen-space-camera">Screen Space - Camera</h2>
+<p>画布自动适应屏幕尺寸改变<br>
+需要设置摄像机 <code>render camera</code></p>
+<figure data-type="image" tabindex="3"><img src="https://i.loli.net/2020/05/07/7qklpU1SWARnPtz.png" alt="Camera" loading="lazy"></figure>
+<img src="https://i.loli.net/2020/05/07/PJhS8XfTEqaIW5o.png" alt="Camera" style="zoom:50%;" />
+<h2 id="world-space">World Space</h2>
+<p>GUI控件类似平面 <code>plane</code> ，所有GUI元素可以位于 3D 物体前后显示<br>
+当 UI 为场景的一部分时，即UI需要以 <strong>3D</strong> 形式展示时，可以使用该模式</p>
+<figure data-type="image" tabindex="4"><img src="https://i.loli.net/2020/05/07/bmzxCBMQw4erThu.png" alt="World Space" loading="lazy"></figure>
+<hr>
+<h3 id="区别">区别</h3>
+<table>
+<thead>
+<tr>
+<th>render mode</th>
+<th>画布对应屏幕</th>
+<th>camera</th>
+<th>像素对应</th>
+<th>适合类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Screen Space - Overlay</td>
+<td>Y</td>
+<td>不需要</td>
+<td>可选</td>
+<td>2D UI</td>
+</tr>
+<tr>
+<td>Screen Space - Camera</td>
+<td>Y</td>
+<td>需要</td>
+<td>可选</td>
+<td>2D UI</td>
+</tr>
+<tr>
+<td>World Space</td>
+<td>N</td>
+<td>需要</td>
+<td>可选</td>
+<td>3D UI</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="更新后的名称">更新后的名称</h1>
+<p>在 Unity 2019.3.4f1 版本中，看到 Canvas 的 Render Mode 选项在某些情况下名称不同</p>
+<h2 id="overlay">Overlay</h2>
+<figure data-type="image" tabindex="5"><img src="https://i.loli.net/2020/05/07/g41pDqLPXneGA9B.png" alt="Overlay" loading="lazy"></figure>
+<hr>
+<h2 id="camera">Camera</h2>
+<figure data-type="image" tabindex="6"><img src="https://i.loli.net/2020/05/07/yS12W7GtfouvdQm.png" alt="Camera" loading="lazy"></figure>
+<hr>
+<h2 id="world-space-2">World Space</h2>
+<figure data-type="image" tabindex="7"><img src="https://i.loli.net/2020/05/07/XhSJaWYMstoQdHv.png" alt="World Space" loading="lazy"></figure>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Unity | Scene 场景卡死问题]]></title>
+        <id>https://jermyhunter.github.io/post/Unity  场景卡死问题/</id>
+        <link href="https://jermyhunter.github.io/post/Unity  场景卡死问题/">
+        </link>
+        <updated>2020-05-05T03:26:42.000Z</updated>
+        <content type="html"><![CDATA[<p>在游戏场景中，通过暂停菜单退回到主菜单，再进入新的游戏场景，发现游戏会突然卡住</p>
+<p>以下列出我出现的情况及解决方案</p>
+<p><strong>原因：</strong></p>
+<p>暂停菜单使得游戏里的时间流逝 <code>Time.timeScale = 0</code>，而在退回时没有及时调回</p>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/05/05/biNflWFRV5GLO6Z.png" alt="在每次加载主菜单时，输出 Time.timeScale 发现问题" loading="lazy"></figure>
+<p><strong>解决方法：</strong></p>
+<p>不能只将 <code>Time.timeScale</code> 恢复为1，还要修改菜单的逻辑（<code>GameIsPaused</code> 影响游戏菜单的弹出）</p>
+<p>正确的做法应该是调用 <code>Resume()</code>，再返回主菜单</p>
+<pre><code class="language-c#">public void ReturnToMain()
+{
+    SceneManager.LoadScene(0);
+    Resume();
+}
+
+public void Resume()
+{
+    pauseMenuUI.SetActive(false);
+    Time.timeScale = 1f;
+    GameIsPaused = false;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Tkinter 快速导读]]></title>
+        <id>https://jermyhunter.github.io/post/Tkinter 快速导读/</id>
+        <link href="https://jermyhunter.github.io/post/Tkinter 快速导读/">
+        </link>
+        <updated>2020-05-04T16:08:45.000Z</updated>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/05/05/5af4w2VIeUtGiuE.png" alt="Tkinter" loading="lazy"></figure>
+<p>旧版的 Tkinter<br>
+使用 tkinter</p>
+<p>新版使用 tkinter.ttk<br>
+样式更贴合现代</p>
+<p><code>import tkinter as tk</code></p>
+<h2 id="window">window</h2>
+<p>初始化窗口</p>
+<h3 id="window-tktk">window = tk.Tk()</h3>
+<p>生成主窗口</p>
+<h3 id="windowmainloop">window.mainloop()</h3>
+<p>不断刷新窗口状态<br>
+*只有添加该条指令，窗口才可视</p>
+<h2 id="widget">widget</h2>
+<p>顾名思义，小组件<br>
+部署在主窗口内</p>
+<h3 id="常用组件及方法">常用组件及方法</h3>
+<ul>
+<li>
+<p>Label</p>
+<p>不能编辑的标签<br>
+主要用来提示</p>
+</li>
+<li>
+<p>Button</p>
+<p>可交互按钮<br>
+可触发事件</p>
+</li>
+<li>
+<p>Entry</p>
+<p>单行的文本输入</p>
+<ul>
+<li>
+<p>get()</p>
+</li>
+<li>
+<p>delete()</p>
+<ul>
+<li>
+<p>delete(pos)</p>
+</li>
+<li>
+<p>delete(start,end)</p>
+<p>从 0 开始</p>
+</li>
+<li>
+<p>delete(0,tk.END)</p>
+<p>delete ALL</p>
+</li>
+</ul>
+</li>
+<li>
+<p>insert()</p>
+<ul>
+<li>insert(pos, str)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Text</p>
+<p>多行的文本输入</p>
+<ul>
+<li>
+<p>get()</p>
+<ul>
+<li>
+<p>get(start,end)</p>
+<p>eg.<br>
+txt_content.get(0,10)<br>
+获取第1到第11个字符</p>
+<p>字符包含换行符</p>
+</li>
+</ul>
+</li>
+<li>
+<p>delete()</p>
+<ul>
+<li>delete(start,end)</li>
+</ul>
+</li>
+<li>
+<p>insert()</p>
+<ul>
+<li>insert(start,end)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Frame</p>
+<p>用来承载其他组件组织窗口</p>
+</li>
+</ul>
+<h3 id="common-attrib-共有属性">common attrib 共有属性</h3>
+<p>eg.<br>
+lbl_submit = tk.Label(master = frm_main, bg = 'black', width = 10, text = &quot;Submit&quot;)</p>
+<ul>
+<li>
+<p>master</p>
+<p>父组件</p>
+<p>eg. frm_main = tk.Frame(master=window)</p>
+</li>
+<li>
+<p>bg</p>
+</li>
+<li>
+<p>fg</p>
+</li>
+<li>
+<p>width</p>
+<p>单位为 pixel 像素</p>
+</li>
+<li>
+<p>height</p>
+</li>
+<li>
+<p>borderwidth</p>
+<p>tk.FLAT<br>
+tk.SUNKEN<br>
+tk.RAISED<br>
+tk.GROOVE<br>
+tk.RIDGE</p>
+<p>显示样式</p>
+<p>可以用下面的字典来快速引用<br>
+border_effects = {<br>
+  &quot;flat&quot;: tk.FLAT,<br>
+  &quot;sunken&quot;: tk.SUNKEN,<br>
+  &quot;raised&quot;: tk.RAISED,<br>
+  &quot;groove&quot;: tk.GROOVE,<br>
+  &quot;ridge&quot;: tk.RIDGE,<br>
+}<br>
+eg. frm_main = tk.Frame(master=window, relief=border_effects[&quot;flat&quot;])</p>
+</li>
+<li>
+<p>text</p>
+<p>eg.</p>
+<p>btn_submit[&quot;text&quot;] = &quot;Submit&quot;</p>
+</li>
+<li>
+<p>image</p>
+</li>
+</ul>
+<h2 id="layout">Layout</h2>
+<p>生成的 widget 调用<br>
+合并到设置好的 master 上</p>
+<p>*除了主窗口，其他组件都需要使用</p>
+<h3 id="pack">.pack()</h3>
+<ul>
+<li>
+<p>ipadx/y=</p>
+<p>内部间隔<br>
+eg. ipadx = 10, ipady = 10<br>
+内部的间隔各为10px</p>
+</li>
+<li>
+<p>padx/y=</p>
+</li>
+<li>
+<p>side=</p>
+<p>tk.LEFT/RIGHT/TOP/BOTTOM</p>
+<p>当前的 widget 具体停靠在那边</p>
+</li>
+<li>
+<p>fill=</p>
+<p>tk.X/Y/BOTH</p>
+<p>在 X / Y / BOTH 方向上扩展</p>
+</li>
+<li>
+<p>expand=</p>
+<p>True/False</p>
+<p>是否随着窗口大小变化而变化</p>
+</li>
+</ul>
+<h3 id="grid">.grid()</h3>
+<ul>
+<li>
+<p>row=</p>
+<p>widget 所在行号，从0开始</p>
+</li>
+<li>
+<p>column=</p>
+<p>widget 所在列号，从0开始</p>
+</li>
+<li>
+<p>sticky=</p>
+<p>&quot;n&quot; &quot;e&quot; &quot;s&quot; &quot;w&quot;<br>
+可自由组合</p>
+<p>eg.<br>
+btn_submit.grid(sticky=&quot;ne&quot;)<br>
+靠东北方</p>
+</li>
+</ul>
+<h2 id="event">Event</h2>
+<p>原理为每次 mainloop() 检查是否触发了事件</p>
+<h3 id="bind">bind()</h3>
+<p>全局事件</p>
+<ul>
+<li>
+<p>两个必备参数</p>
+<ul>
+<li>
+<p>event</p>
+<p>事件名称，内置事件<br>
+所有 event 的参考网址：<br>
+https://effbot.org/tkinterbook/tkinter-events-and-bindings.htm</p>
+</li>
+<li>
+<p>event handler</p>
+<p>函数，参数为 event</p>
+<p>eg.<br>
+def function(event):<br>
+....</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="command">command=</h3>
+<p>和按钮等绑定，单击触发</p>
+<p>eg.<br>
+def Print():<br>
+print(btn_print[&quot;text])</p>
+<p>btn_print = tk.Button(master=window, text=&quot;Hello World!&quot;, command=Print)</p>
+<p>点击按钮，输出按钮的 text 属性</p>
+<ul>
+<li>button</li>
+<li>event handler</li>
+</ul>
+<p><em>XMind: ZEN - Trial Version</em></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Unity | FPS character controller 第一人称视角的人物控制]]></title>
+        <id>https://jermyhunter.github.io/post/Unity  FPS character controller 第一人称视角的人物控制/</id>
+        <link href="https://jermyhunter.github.io/post/Unity  FPS character controller 第一人称视角的人物控制/">
+        </link>
+        <updated>2020-05-03T15:50:12.000Z</updated>
+        <content type="html"><![CDATA[<p><a href="https://www.youtube.com/watch?v=_QajrabyTJc">FPS movement in Unity (youtube)</a></p>
+<p>There are <strong>Two</strong> ways to create Character</p>
+<p>这里只介绍第一种，使用人物控制组件<code>Character Controller</code> 制作<br>
+<img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503132727749.png" alt="20200503132727749" loading="lazy"><br>
+做一个FPS需要注意的所有问题<br>
+<img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503132752896.png" alt="做一个FPS需要注意的所有问题" loading="lazy"></p>
+<hr>
+<h1 id="创建character-controller-组件">创建Character Controller 组件</h1>
+<p>创建一个空对象 <code>First Person Player</code>，加入 <code>Character Controller</code> 组件，设置 <code>radius</code> 和 <code>height</code>（胶囊的半径和高度）</p>
+<p>设置相机，将 <code>Main Camera</code> 相机移动到 <code>First Person Player</code> 中</p>
+<p>为了更好地看到效果，在空对象下挂载子对象<code>cylinder</code>，移动位置，让相机在物体内（这样视野中不会看到 <code>cylinder</code> ）</p>
+<figure data-type="image" tabindex="1"><img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/LNPv2U5WKd6ieJg.png" alt="Camera 的效果" loading="lazy"></figure>
+<p><img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503133535458.png" alt="对象的层级设置" loading="lazy"><br>
+（灰色部分之后会用到，可以先不用管）</p>
+<hr>
+<h1 id="camera-视角移动">Camera 视角移动</h1>
+<p>首先分析一下鼠标的移动对于视角的影响</p>
+<p>鼠标在屏幕的两个方向 <code>X/Y</code> 上移动<br>
+<code>X</code> 方向控制左右旋转，<code>Y</code> 方向控制上下旋转</p>
+<p>*注意，上下的视角移动限制在一定角度内<br>
+使用 <strong>Mathf.Clamp</strong> 完成</p>
+<figure data-type="image" tabindex="2"><img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503133809144.png" alt="鼠标在两个轴上移动" loading="lazy"></figure>
+<h2 id="获取鼠标的移动输入">获取鼠标的移动输入</h2>
+<p>在导航栏 <code>edit -&gt; project settings -&gt; input</code> 中查看鼠标左右移动对应的输入名称<br>
+<img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503134016932.png" alt="查看鼠标左右移动对应的输入名称" loading="lazy"><br>
+在<code>First Person Player</code>上创建脚本 <code>MouseLook.cs</code></p>
+<h2 id="camera-脚本设置">Camera 脚本设置</h2>
+<p><strong>variables 变量设置</strong></p>
+<pre><code class="language-c#">public float mouseSensitivity = 100f;
+public Transform playerBody;
+float xRotation = 0f;
+</code></pre>
+<hr>
+<p>获取鼠标的移动<br>
+<code>float mouseX = Input.GetAxis(&quot;Mouse X&quot;)</code><br>
+<code>float mouseY = Input.GetAxis(&quot;Mouse Y&quot;)</code></p>
+<p>设置鼠标灵敏度<br>
+<code>public float mouseSensitivity = 100f</code></p>
+<p>获取 <code>FirstPersonPlayer</code> 的 <code>transform</code> 组件（相机为子对象，跟随人物旋转视角 ）</p>
+<figure data-type="image" tabindex="3"><img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503134939607.png" alt="在这里插入图片描述" loading="lazy"></figure>
+<p>修改后：</p>
+<pre><code class="language-c#">float mouseX = Input.GetAxis(&quot;Mouse X&quot;) * mouseSensitivity * Time.deltaTime;
+float mouseY = Input.GetAxis(&quot;Mouse Y&quot;) * mouseSensitivity * Time.deltaTime;
+</code></pre>
+<hr>
+<h3 id="左右方向转动">左右方向转动</h3>
+<p>变量设置<br>
+<code>public Transform playerBody;</code><br>
+绑定为 <code>First Person Player</code></p>
+<p><strong>*注意</strong>，不是Camera，相机为子对象，随人物移动，不需要再移动相机</p>
+<pre><code class="language-c#">playerBody.Rotate(Vector3.up * mouseX);
+</code></pre>
+<hr>
+<h3 id="上下方向转动">上下方向转动</h3>
+<p>设置基于 <code>X</code> 轴的转动（X对应左右，Y对应垂直，Z对应前后，需要在YOZ平面移动，所以对应X）<br>
+<code>float xRotation = 0f ; //初始角度为0f</code></p>
+<pre><code class="language-c#">xRotation -= mouseY;
+xRotation = Mathf.Clamp(xRotation, -90f, 90f);// limit the angle
+transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+</code></pre>
+<hr>
+<p>设置鼠标锁定不可视的效果</p>
+<pre><code class="language-c#">void Start(){
+	Cursor.lockState = CursorLockMode.Locked;
+}
+</code></pre>
+<hr>
+<p>完整版</p>
+<pre><code class="language-c#">using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MouseLook : MonoBehaviour
+{
+
+    public float mouseSensitivity = 100f;
+
+    public Transform playerBody;
+
+    float xRotation = 0f;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        // lock and hide the cursor
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float mouseX = Input.GetAxis(&quot;Mouse X&quot;) * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis(&quot;Mouse Y&quot;) * mouseSensitivity * Time.deltaTime;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);// limit the angle
+
+        // rotate the camera within Y axis
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        // rotate the player within X axis
+        playerBody.Rotate(Vector3.up * mouseX);
+    }
+}
+</code></pre>
+<hr>
+<h1 id="playermovement-人物移动">PlayerMovement 人物移动</h1>
+<p>首先，默认方向键对应的名称及数值如下，可以在 <code>Edit -&gt; Project Settings -&gt; Input Manager</code> 中查看<br>
+<img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503135205867.png" alt="默认方向键对应的名称及数值" loading="lazy"><br>
+<code>First Person Player</code> 添加脚本 <code>PlayerMovement.cs</code></p>
+<pre><code class="language-c#">public class PlayerMovement : MonoBehaviour
+{
+    public CharacterController controller;
+
+    public float speed = 12f;
+    // Update is called once per frame
+    void Update()
+    {
+        float x = Input.GetAxis(&quot;Horizontal&quot;);
+        float z = Input.GetAxis(&quot;Vertical&quot;);
+
+        //Vector3 move = new Vector3(x, 0f, z);// × global movement, we dont want
+        Vector3 move = transform.right * x + transform.forward * z;// move along the local coordinates right and forward
+
+        controller.Move(move * speed * Time.deltaTime);
+    }
+}
+</code></pre>
+<p><strong>*注意，移动需要沿着玩家当前的位置进行移动</strong><br>
+所以需要获取当前物体的局部坐标系对应世界坐标的方向向量</p>
+<p>常用的三个：</p>
+<ul>
+<li><code>transform.right</code></li>
+<li><code>transform.forward</code></li>
+<li><code>transform.up</code></li>
+</ul>
+<pre><code class="language-c#">Vector3 move = transform.right * x + transform.forward * z;
+</code></pre>
+<hr>
+<h1 id="stairs">stairs</h1>
+<p>调整 <code>step offset</code>，代表能踏上距离地面多高范围内的台阶</p>
+<figure data-type="image" tabindex="4"><img src="D:%5CBlog%5Csource_posts%5Cpic%5C20200503135622401.png" alt="设置Step Offset" loading="lazy"></figure>
+<hr>
+<h2 id="测试">测试</h2>
+<figure data-type="image" tabindex="5"><img src="D:%5CBlog%5Csource_posts%5Cpic%5C20200503140115637.gif" alt="楼梯效果" loading="lazy"></figure>
+<hr>
+<h2 id="gravity-重力模拟">Gravity 重力模拟</h2>
+<p>重力影响下的速度和位移的曲线图<br>
+<img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503140236770.png" alt="重力影响下的速度和位移的曲线图" loading="lazy"></p>
+<hr>
+<p><strong>variables 变量设置</strong></p>
+<pre><code class="language-c#">public Transform groundCheck;
+public float groundDistance = 0.4f;// radius
+public LayerMask groundMask;
+
+bool isGrounded;
+</code></pre>
+<hr>
+<h2 id="重力对-y-方向上速度的影响">重力对 y 方向上速度的影响</h2>
+<p>在地面上我们不希望有任何 <code>y</code> 方向的速度，所以在接触地面时要清空 <code>y</code> 方向上的速度</p>
+<hr>
+<h2 id="groundcheck-用来监测地面的空对象">GroundCheck 用来监测地面的空对象</h2>
+<p>在人物的最下方，添加一个空对象，用来监测与地面距离</p>
+<figure data-type="image" tabindex="6"><img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503140405741.png" alt="GroundCheck 位置摆放" loading="lazy"></figure>
+<hr>
+<h2 id="checksphere">CheckSphere</h2>
+<p><code>Physics.CheckSphere</code> 用来监测一定距离内是否有 collider</p>
+<p>可以探测物体是否接触地面，这时候就要用到 <code>GroundCheck</code></p>
+<hr>
+<p><code>CheckSphere(position, radius, mask)</code></p>
+<blockquote>
+<p>Returns true if there are any <strong>colliders</strong> overlapping the sphere defined by <code>position</code> and <code>radius</code> in world coordinates.</p>
+</blockquote>
+<hr>
+<h3 id="ground-mask">Ground Mask</h3>
+<p>添加一个层级蒙版变量，用来检测接触到的物体是否为地面而非其他物体</p>
+<hr>
+<h4 id="添加和修改层级">添加和修改层级</h4>
+<p><img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503140616340.png" alt="添加层级" loading="lazy"><br>
+修改地面物体的层级，应用于所有子对象<br>
+<img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503140657262.png" alt="修改Ground的层级" loading="lazy"></p>
+<hr>
+<p>设置脚本的 <code>Ground Mask</code> 为 <code>Ground</code><br>
+<img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503140908896.png" alt="设置脚本的 Ground Mask" loading="lazy"></p>
+<hr>
+<h1 id="jump">Jump</h1>
+<p>最后加上跳跃的效果</p>
+<p>跳跃高度与速度的物体公式为</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi><mo>=</mo><msqrt><mrow><mn>2</mn><mi>h</mi><mi>g</mi></mrow></msqrt></mrow><annotation encoding="application/x-tex">v = \sqrt{2hg}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.24em;vertical-align:-0.25612499999999994em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.983875em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mord" style="padding-left:1em;"><span class="mord">2</span><span class="mord mathdefault">h</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span></span></span><span style="top:-2.9438750000000002em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg width='400em' height='1.28em' viewBox='0 0 400000 1296' preserveAspectRatio='xMinYMin slice'><path d='M263,681c0.7,0,18,39.7,52,119c34,79.3,68.167,
+158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120c340,-704.7,510.7,-1060.3,512,-1067
+c4.7,-7.3,11,-11,19,-11H40000v40H1012.3s-271.3,567,-271.3,567c-38.7,80.7,-84,
+175,-136,283c-52,108,-89.167,185.3,-111.5,232c-22.3,46.7,-33.8,70.3,-34.5,71
+c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1s-109,-253,-109,-253c-72.7,-168,-109.3,
+-252,-110,-252c-10.7,8,-22,16.7,-34,26c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26
+s76,-59,76,-59s76,-60,76,-60z M1001 80H40000v40H1012z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25612499999999994em;"><span></span></span></span></span></span></span></span></span></span></p>
+<p>由于设置了重力为负，所以修改为</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi><mo>=</mo><msqrt><mrow><mo>−</mo><mn>2</mn><mi>h</mi><mi>g</mi></mrow></msqrt></mrow><annotation encoding="application/x-tex">v = \sqrt{-2hg}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.24em;vertical-align:-0.25612499999999994em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.983875em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mord" style="padding-left:1em;"><span class="mord">−</span><span class="mord">2</span><span class="mord mathdefault">h</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span></span></span><span style="top:-2.9438750000000002em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg width='400em' height='1.28em' viewBox='0 0 400000 1296' preserveAspectRatio='xMinYMin slice'><path d='M263,681c0.7,0,18,39.7,52,119c34,79.3,68.167,
+158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120c340,-704.7,510.7,-1060.3,512,-1067
+c4.7,-7.3,11,-11,19,-11H40000v40H1012.3s-271.3,567,-271.3,567c-38.7,80.7,-84,
+175,-136,283c-52,108,-89.167,185.3,-111.5,232c-22.3,46.7,-33.8,70.3,-34.5,71
+c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1s-109,-253,-109,-253c-72.7,-168,-109.3,
+-252,-110,-252c-10.7,8,-22,16.7,-34,26c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26
+s76,-59,76,-59s76,-60,76,-60z M1001 80H40000v40H1012z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25612499999999994em;"><span></span></span></span></span></span></span></span></span></span></p>
+<p><strong>variables 设置变量</strong></p>
+<pre><code class="language-c#">public float jumpHight = 2f;// 跳跃高度
+</code></pre>
+<hr>
+<h2 id="脚本设置">脚本设置</h2>
+<p><strong>jump</strong></p>
+<pre><code class="language-c#">if(Input.GetButtonDown(&quot;Jump&quot;) &amp;&amp; isGrounded)
+{
+    velocity.y = Mathf.Sqrt(-2f * jumpHight * gravity);
+}
+</code></pre>
+<hr>
+<p>最后再检查一遍脚本的对象挂载<br>
+<img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503141216945.png" alt="Player Movement 的对象挂载" loading="lazy"></p>
+<hr>
+<h2 id="测试-2">测试</h2>
+<figure data-type="image" tabindex="7"><img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503141456743.gif" alt="跳跃效果测试" loading="lazy"></figure>
+<p>完成！</p>
+<hr>
+<h2 id="提升">*提升</h2>
+<p>真实情况下，一般人物在空中是无法左右移动的，所以人物在空中时，加上对左右移动的限制效果</p>
+<h3 id="限制人物空中改变方向">限制人物空中改变方向</h3>
+<p>将 <code>Vector3 move</code> 设置为类成员变量，只有接触到地面才能改变方向</p>
+<pre><code class="language-c#">float x = Input.GetAxis(&quot;Horizontal&quot;);
+float z = Input.GetAxis(&quot;Vertical&quot;);
+
+if(isGrounded)
+{
+    move = transform.right * x + transform.forward * z;
+}
+controller.Move(move * speed * Time.deltaTime);
+</code></pre>
+<hr>
+<h2 id="测试-3">测试</h2>
+<figure data-type="image" tabindex="8"><img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503143041746.gif" alt="空中人物移动方向锁定" loading="lazy"></figure>
+<hr>
+<h1 id="小结">小结</h1>
+<p>使用 <code>CharacterController</code> 控制人物移动，需要划分 <strong>视角移动</strong> 以及 <strong>人物移动</strong></p>
+<h2 id="视角移动">视角移动</h2>
+<p>视角的上下旋转为相机的自我旋转，限定一个范围 <code>[-90,90]</code><br>
+左右旋转为人物的旋转，相机随人物旋转</p>
+<h2 id="人物移动">人物移动</h2>
+<p>人物方向移动依靠 <code>Horizontal</code> 和 <code>Vertical</code> 方向键控制<br>
+需要注意坐标轴为局部坐标轴 <code>transform.right</code> <code>transform.forward</code></p>
+<p>重力根据重力公式修改 <code>velocity.y</code> 的速度，需要检测地面，在人物底面添加 <code>CheckGround</code> 空对象来探测</p>
+<p>跳跃根据公式模拟，修改物体速度即可</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[数据库 | 关系的完整性 - 域、实体、参照]]></title>
+        <id>https://jermyhunter.github.io/post/数据库  关系的完整性 - 域、实体、参照/</id>
+        <link href="https://jermyhunter.github.io/post/数据库  关系的完整性 - 域、实体、参照/">
+        </link>
+        <updated>2020-05-03T15:00:00.000Z</updated>
+        <content type="html"><![CDATA[<p><em><strong>reference：</strong></em></p>
+<p>https://blog.csdn.net/u010398493/article/details/76222567</p>
+<p>数据库关系的完整性，主要包括域完整性、实体完整性和参照完整性三种。</p>
+<h3 id="域列完整性">域（列）完整性</h3>
+<p>域完整性是对数据表中<strong>字段属性</strong>的约束<br>
+通常指 <code>数据的有效性</code> ，它包括字段的值域、字段的类型及字段的有效规则等约束<br>
+它是由确定关系结构时所定义的字段的属性决定的,限制数据类型,缺省值,规则,约束,是否可以为空</p>
+<p>域完整性可以<strong>确保不会输入无效的值</strong></p>
+<h3 id="实体行完整性">实体（行）完整性</h3>
+<p>实体完整性是对关系中的 <code>记录唯一性</code>，也就是<strong>主键的约束</strong>。<br>
+准确地说，实体完整性是指关系中的<strong>主属性值不能为Null且不能有相同值</strong></p>
+<p>定义表中的所有行能唯一的标识,一般用<code>主键</code>，唯一索引 <code>unique</code> 关键字，及 <code>identity</code> 属性比如说我们的身份证号码,可以唯一标识一个人.</p>
+<h3 id="参照完整性">参照完整性</h3>
+<p>参照完整性是对关系数据库中建立关联关系的数据表间数据参照引用的约束，也就是<strong>对外键的约束</strong><br>
+准确地说，参照完整性是指关系中的 <code>外键必须是另一个关系的主键有效值，或者是NULL</code></p>
+<p>参考完整性维护表间数据的有效性,完整性,通常<strong>通过建立外部键联系另一表的主键实现</strong>,还可以用<strong>触发器</strong>来维护参考完整性</p>
+<h2 id="总结">总结</h2>
+<ul>
+<li>域-&gt;列
+<ul>
+<li>数据是否有效（合法）</li>
+</ul>
+</li>
+<li>实体-&gt;行
+<ul>
+<li>记录唯一性</li>
+</ul>
+</li>
+<li>参照完整性-&gt;外键
+<ul>
+<li>外键必须是另一个关系主键有效值，or NULL</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://jermyhunter.github.io/post/hello-gridea/</id>

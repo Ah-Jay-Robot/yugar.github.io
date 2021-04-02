@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>关于 | Gridea</title>
+<title>Unity | Scene 场景卡死问题 | Gridea</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -20,15 +20,14 @@
 
 
 
-    <meta name="description" content="
-欢迎来到我的小站呀，很高兴遇见你！🤝
+    <meta name="description" content="在游戏场景中，通过暂停菜单退回到主菜单，再进入新的游戏场景，发现游戏会突然卡住
+以下列出我出现的情况及解决方案
+原因：
+暂停菜单使得游戏里的时间流逝 Time.timeScale = 0，而在退回时没有及时调回
 
-🏠 关于本站
-👨‍💻 博主是谁
-⛹ 兴趣爱好
-📬 联系我呀
-..." />
-    <meta name="keywords" content="" />
+解决方法：
+不能只将 Ti..." />
+    <meta name="keywords" content="Unity,Q&A" />
   </head>
   <body>
     <div id="app" class="main">
@@ -101,20 +100,55 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">关于</h2>
-            <div class="post-date">2019-01-25</div>
+            <h2 class="post-title">Unity | Scene 场景卡死问题</h2>
+            <div class="post-date">2020-05-05</div>
             
             <div class="post-content" v-pre>
-              <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+              <p>在游戏场景中，通过暂停菜单退回到主菜单，再进入新的游戏场景，发现游戏会突然卡住</p>
+<p>以下列出我出现的情况及解决方案</p>
+<p><strong>原因：</strong></p>
+<p>暂停菜单使得游戏里的时间流逝 <code>Time.timeScale = 0</code>，而在退回时没有及时调回</p>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/05/05/biNflWFRV5GLO6Z.png" alt="在每次加载主菜单时，输出 Time.timeScale 发现问题" loading="lazy"></figure>
+<p><strong>解决方法：</strong></p>
+<p>不能只将 <code>Time.timeScale</code> 恢复为1，还要修改菜单的逻辑（<code>GameIsPaused</code> 影响游戏菜单的弹出）</p>
+<p>正确的做法应该是调用 <code>Resume()</code>，再返回主菜单</p>
+<pre><code class="language-c#">public void ReturnToMain()
+{
+    SceneManager.LoadScene(0);
+    Resume();
+}
+
+public void Resume()
+{
+    pauseMenuUI.SetActive(false);
+    Time.timeScale = 1f;
+    GameIsPaused = false;
+}
+</code></pre>
 
             </div>
             
+              <div class="tag-container">
+                
+                  <a href="https://jermyhunter.github.io/tag/Hmbxj74Nd/" class="tag">
+                    Unity
+                  </a>
+                
+                  <a href="https://jermyhunter.github.io/tag/Lm3JhFXhdd/" class="tag">
+                    Q&amp;A
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://jermyhunter.github.io/post/Tkinter 快速导读/">
+                  <h3 class="post-title">
+                    Tkinter 快速导读
+                  </h3>
+                </a>
+              </div>
             
 
             

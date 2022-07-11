@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Unity | Slider 环形血条效果制作 | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.min.css">
+<link rel="shortcut icon" href="https://jermyhunter.github.io/favicon.ico?v=1657517722007">
+<link rel="stylesheet" href="https://jermyhunter.github.io/styles/main.css">
+
+
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="创建 Slider
+创建 slider
+设置 canvas 的 Render mdoe 为 world space / 或者为 not important
+
+删除 handle slider area
+
+这时候，如果修改 Slider 的 ..." />
+    <meta name="keywords" content="Unity" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://jermyhunter.github.io">
+        <img src="https://jermyhunter.github.io/images/avatar.png?v=1657517722007" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jermyhunter.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Unity | Slider 环形血条效果制作</h2>
+            <div class="post-date">2020-05-07</div>
+            
+            <div class="post-content" v-pre>
+              <h2 id="创建-slider">创建 Slider</h2>
+<p>创建 <code>slider</code></p>
+<p>设置 <code>canvas</code> 的 <code>Render mdoe</code> 为 <code>world space</code> / 或者为 <code>not important</code></p>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/05/07/CXPcmaQ71EVYxbU.png" alt="设置 Canvas 的渲染模式为 not important" loading="lazy"></figure>
+<p>删除 <code>handle slider area</code></p>
+<figure data-type="image" tabindex="2"><img src="https://i.loli.net/2020/05/07/CFcjMsoUDJiduWL.png" alt="Slider对象的层级结构" loading="lazy"></figure>
+<p>这时候，如果修改 <code>Slider</code> 的 <code>value</code>，你会发现有进度条的效果出现</p>
+<hr>
+<h2 id="环形效果">环形效果</h2>
+<p>设置 <code>background</code> 和 <code>fill</code></p>
+<ul>
+<li><code>source img</code> 加载环形 <code>sprite</code><br>
+（导入图片时，需要修改导入图片的属性，转为 <code>sprite</code>，再点击 <code>Apply</code>，这样才能够使用）</li>
+</ul>
+<figure data-type="image" tabindex="3"><img src="https://i.loli.net/2020/05/07/rzFTYwKd76j2pOC.png" alt="image-20200403142411268" loading="lazy"></figure>
+<hr>
+<h3 id="修改-slider-的-rect-组件">修改 slider 的 Rect 组件</h3>
+<p>设置 <code>slider</code> 的 <code>width</code> <code>height</code></p>
+<p>将 <code>canvas</code> 下的所有对象（包括子对象）的锚点都设置为 <code>stretch</code><br>
+在锚点设置中，按住 <code>Alt</code> 点击最右下角的预置方式即可</p>
+<figure data-type="image" tabindex="4"><img src="https://i.loli.net/2020/05/07/CvNnOkXK4MythSQ.png" alt="按住 Alt，再点击最右下角的锚点布局" loading="lazy"></figure>
+<p>修改后的效果，已经有环形血条的效果了</p>
+<figure data-type="image" tabindex="5"><img src="https://i.loli.net/2020/05/07/KDe2miS8kp4EPfU.png" alt="血条的环形效果" loading="lazy"></figure>
+<hr>
+<h3 id="设置颜色">设置颜色</h3>
+<p>设置颜色</p>
+<p><code>background</code> 设置红色的背景色</p>
+<figure data-type="image" tabindex="6"><img src="https://i.loli.net/2020/05/07/CMwU5f3y4cvAzLa.png" alt="设置红色背景" loading="lazy"></figure>
+<p><code>fill</code>  设置填充的前景色，设置为绿色</p>
+<figure data-type="image" tabindex="7"><img src="https://i.loli.net/2020/05/07/3JqB6ydWF1AuxbY.png" alt="fill 设置为绿色" loading="lazy"></figure>
+<p>可以加上一点透明度，看起来更舒适</p>
+<hr>
+<p>但是这时候如果调整 <code>Slider</code> 的 <code>Value</code> 值，你会发现血条并不是以预期的状态填充</p>
+<hr>
+<h3 id="修改图片类型">修改图片类型</h3>
+<p>将 <code>image type</code> 改为 <code>filled</code> ，<code>Fill Method</code> 设置为 <code>Radial 360</code>，调整 <code>fill amount</code> 查看效果<br>
+（<code>Fill Origin</code> 控制初始的填充点位置，<code>Clockwise</code> 调整填充的方向，其他效果可以自行探索）</p>
+<figure data-type="image" tabindex="8"><img src="https://i.loli.net/2020/05/07/An4pi1ZIhXFUwQ9.png" alt="修改 Fill 的图片类型" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="https://i.loli.net/2020/05/07/YCfEItZTA4vPMHO.png" alt="修改后的效果" loading="lazy"></figure>
+<hr>
+<h2 id="挂载到物体上">挂载到物体上</h2>
+<p>在 <code>Hierarchy</code> 视图中，将 <code>canvas</code> 拖动到角色 <code>cube</code> 下，设置位置坐标都为 0<br>
+修改 <code>Y</code> 坐标，调整垂直方向的位置</p>
+<figure data-type="image" tabindex="10"><img src="https://i.loli.net/2020/05/07/1Z8kVFISlvxsyut.png" alt="完成后的效果" loading="lazy"></figure>
+<hr>
+<h2 id="脚本交互">脚本交互</h2>
+<p><code>Slider</code> 的 <code>Max Value</code> 和 <code>Min Value</code> 控制血条的前景长度<br>
+在脚本中，只需要获取 <code>Slider</code> 后，修改 <code>Slider.value</code> 属性即可</p>
+<figure data-type="image" tabindex="11"><img src="https://i.loli.net/2020/05/07/FIg4veba57zusKM.png" alt="Max Value 和 Min Value 控制 Slider 的填充范围" loading="lazy"></figure>
+<hr>
+<h1 id="小结">小结</h1>
+<ul>
+<li>
+<p>环形血条由于是在整个3D空间范围内存在的，非 2D，所以需要使用 World Space 这种 3D 分布方式</p>
+</li>
+<li>
+<p>画布 <code>Canvas</code></p>
+<ul>
+<li>画布 <code>Canvas</code> 相当于需要显示血条对象的一个附属组件（*****任何 UI 对象在离开 <code>Canvas</code> 后都无法独立存活）</li>
+<li>将画布的所有子对象的锚点设置在四个最外的边界，保证修改 <code>Canvas</code> 的大小时，其子对象也会随之一起变化</li>
+</ul>
+</li>
+<li>
+<p>制作的血条形状与 <code>background</code> 和 <code>fill</code> 对象的 <code>image</code> 组件的 <code>source image</code> 属性有着密切的关系，血条的形状取决于它</p>
+</li>
+<li>
+<p><code>fill</code> 的图片类型决定了血条的填充效果</p>
+</li>
+</ul>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://jermyhunter.github.io/tag/Hmbxj74Nd/" class="tag">
+                    Unity
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://jermyhunter.github.io/post/Unity  UI - Canvas - Render Mode 的三种模式/">
+                  <h3 class="post-title">
+                    Unity | UI - Canvas - Render Mode 的三种模式
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

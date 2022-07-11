@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Unity | Scene 场景卡死问题 | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.min.css">
+<link rel="shortcut icon" href="https://jermyhunter.github.io/favicon.ico?v=1657517722007">
+<link rel="stylesheet" href="https://jermyhunter.github.io/styles/main.css">
+
+
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="在游戏场景中，通过暂停菜单退回到主菜单，再进入新的游戏场景，发现游戏会突然卡住
+以下列出我出现的情况及解决方案
+原因：
+暂停菜单使得游戏里的时间流逝 Time.timeScale = 0，而在退回时没有及时调回
+
+解决方法：
+不能只将 Ti..." />
+    <meta name="keywords" content="Unity,Q&A" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://jermyhunter.github.io">
+        <img src="https://jermyhunter.github.io/images/avatar.png?v=1657517722007" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jermyhunter.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Unity | Scene 场景卡死问题</h2>
+            <div class="post-date">2020-05-05</div>
+            
+            <div class="post-content" v-pre>
+              <p>在游戏场景中，通过暂停菜单退回到主菜单，再进入新的游戏场景，发现游戏会突然卡住</p>
+<p>以下列出我出现的情况及解决方案</p>
+<p><strong>原因：</strong></p>
+<p>暂停菜单使得游戏里的时间流逝 <code>Time.timeScale = 0</code>，而在退回时没有及时调回</p>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/05/05/biNflWFRV5GLO6Z.png" alt="在每次加载主菜单时，输出 Time.timeScale 发现问题" loading="lazy"></figure>
+<p><strong>解决方法：</strong></p>
+<p>不能只将 <code>Time.timeScale</code> 恢复为1，还要修改菜单的逻辑（<code>GameIsPaused </code> 影响游戏菜单的弹出）</p>
+<p>正确的做法应该是调用 <code>Resume()</code>，再返回主菜单</p>
+<pre><code class="language-c#">public void ReturnToMain()
+{
+    SceneManager.LoadScene(0);
+    Resume();
+}
+
+public void Resume()
+{
+    pauseMenuUI.SetActive(false);
+    Time.timeScale = 1f;
+    GameIsPaused = false;
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://jermyhunter.github.io/tag/Hmbxj74Nd/" class="tag">
+                    Unity
+                  </a>
+                
+                  <a href="https://jermyhunter.github.io/tag/Lm3JhFXhdd/" class="tag">
+                    Q&amp;A
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://jermyhunter.github.io/post/Tkinter 快速导读/">
+                  <h3 class="post-title">
+                    Tkinter 快速导读
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

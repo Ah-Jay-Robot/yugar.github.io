@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Unity | UI - Canvas - Render Mode 的三种模式 | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.min.css">
+<link rel="shortcut icon" href="https://jermyhunter.github.io/favicon.ico?v=1657517722007">
+<link rel="stylesheet" href="https://jermyhunter.github.io/styles/main.css">
+
+
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="每个GUI控件都是画布的子对象
+（添加控件时，GUI会自动创建画布）
+
+Screen Space - Overlay
+UI元素置于屏幕上方
+画布自动适应屏幕尺寸改变
+
+Screen Space - Camera
+画布自动适应屏幕尺寸改变
+需..." />
+    <meta name="keywords" content="Unity,UI" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://jermyhunter.github.io">
+        <img src="https://jermyhunter.github.io/images/avatar.png?v=1657517722007" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jermyhunter.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Unity | UI - Canvas - Render Mode 的三种模式</h2>
+            <div class="post-date">2020-05-07</div>
+            
+            <div class="post-content" v-pre>
+              <p>每个GUI控件都是画布的子对象<br>
+（添加控件时，GUI会自动创建画布）</p>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/05/07/FfBkDGrsbMVJEcd.png" alt="Render mode" loading="lazy"></figure>
+<h2 id="screen-space-overlay">Screen Space - Overlay</h2>
+<p>UI元素置于屏幕上方<br>
+画布自动适应屏幕尺寸改变</p>
+<figure data-type="image" tabindex="2"><img src="https://i.loli.net/2020/05/07/ZEg6SsnhuTfedvD.png" alt="Overlay 重叠" loading="lazy"></figure>
+<h2 id="screen-space-camera">Screen Space - Camera</h2>
+<p>画布自动适应屏幕尺寸改变<br>
+需要设置摄像机 <code>render camera</code></p>
+<figure data-type="image" tabindex="3"><img src="https://i.loli.net/2020/05/07/7qklpU1SWARnPtz.png" alt="Camera" loading="lazy"></figure>
+<img src="https://i.loli.net/2020/05/07/PJhS8XfTEqaIW5o.png" alt="Camera" style="zoom:50%;" />
+<h2 id="world-space">World Space</h2>
+<p>GUI控件类似平面 <code>plane</code> ，所有GUI元素可以位于 3D 物体前后显示<br>
+当 UI 为场景的一部分时，即UI需要以 <strong>3D</strong> 形式展示时，可以使用该模式</p>
+<figure data-type="image" tabindex="4"><img src="https://i.loli.net/2020/05/07/bmzxCBMQw4erThu.png" alt="World Space" loading="lazy"></figure>
+<hr>
+<h3 id="区别">区别</h3>
+<table>
+<thead>
+<tr>
+<th>render mode</th>
+<th>画布对应屏幕</th>
+<th>camera</th>
+<th>像素对应</th>
+<th>适合类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Screen Space - Overlay</td>
+<td>Y</td>
+<td>不需要</td>
+<td>可选</td>
+<td>2D UI</td>
+</tr>
+<tr>
+<td>Screen Space - Camera</td>
+<td>Y</td>
+<td>需要</td>
+<td>可选</td>
+<td>2D UI</td>
+</tr>
+<tr>
+<td>World Space</td>
+<td>N</td>
+<td>需要</td>
+<td>可选</td>
+<td>3D UI</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="更新后的名称">更新后的名称</h1>
+<p>在 Unity 2019.3.4f1 版本中，看到 Canvas 的 Render Mode 选项在某些情况下名称不同</p>
+<h2 id="overlay">Overlay</h2>
+<figure data-type="image" tabindex="5"><img src="https://i.loli.net/2020/05/07/g41pDqLPXneGA9B.png" alt="Overlay" loading="lazy"></figure>
+<hr>
+<h2 id="camera">Camera</h2>
+<figure data-type="image" tabindex="6"><img src="https://i.loli.net/2020/05/07/yS12W7GtfouvdQm.png" alt="Camera" loading="lazy"></figure>
+<hr>
+<h2 id="world-space-2">World Space</h2>
+<figure data-type="image" tabindex="7"><img src="https://i.loli.net/2020/05/07/XhSJaWYMstoQdHv.png" alt="World Space" loading="lazy"></figure>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://jermyhunter.github.io/tag/Hmbxj74Nd/" class="tag">
+                    Unity
+                  </a>
+                
+                  <a href="https://jermyhunter.github.io/tag/ZhFSarRjhj/" class="tag">
+                    UI
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://jermyhunter.github.io/post/Unity  场景卡死问题/">
+                  <h3 class="post-title">
+                    Unity | Scene 场景卡死问题
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

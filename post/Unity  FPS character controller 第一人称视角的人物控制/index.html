@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Unity | FPS character controller 第一人称视角的人物控制 | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.min.css">
+<link rel="shortcut icon" href="https://jermyhunter.github.io/favicon.ico?v=1657517722007">
+<link rel="stylesheet" href="https://jermyhunter.github.io/styles/main.css">
+
+
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="FPS movement in Unity (youtube)
+There are Two ways to create Character
+这里只介绍第一种，使用人物控制组件Character Controller 制作
+
+做一个FPS需..." />
+    <meta name="keywords" content="Unity,Game" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://jermyhunter.github.io">
+        <img src="https://jermyhunter.github.io/images/avatar.png?v=1657517722007" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jermyhunter.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Unity | FPS character controller 第一人称视角的人物控制</h2>
+            <div class="post-date">2020-05-03</div>
+            
+            <div class="post-content" v-pre>
+              <p><a href="https://www.youtube.com/watch?v=_QajrabyTJc">FPS movement in Unity (youtube)</a></p>
+<p>There are <strong>Two</strong> ways to create Character</p>
+<p>这里只介绍第一种，使用人物控制组件<code>Character Controller</code> 制作<br>
+<img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503132727749.png" alt="20200503132727749" loading="lazy"><br>
+做一个FPS需要注意的所有问题<br>
+<img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503132752896.png" alt="做一个FPS需要注意的所有问题" loading="lazy"></p>
+<hr>
+<h1 id="创建character-controller-组件">创建Character Controller 组件</h1>
+<p>创建一个空对象 <code>First Person Player</code>，加入 <code>Character Controller</code> 组件，设置 <code>radius</code> 和 <code>height</code>（胶囊的半径和高度）</p>
+<p>设置相机，将 <code>Main Camera</code> 相机移动到 <code>First Person Player</code> 中</p>
+<p>为了更好地看到效果，在空对象下挂载子对象<code>cylinder</code>，移动位置，让相机在物体内（这样视野中不会看到 <code>cylinder</code> ）</p>
+<figure data-type="image" tabindex="1"><img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/LNPv2U5WKd6ieJg.png" alt="Camera 的效果" loading="lazy"></figure>
+<p><img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503133535458.png" alt="对象的层级设置" loading="lazy"><br>
+（灰色部分之后会用到，可以先不用管）</p>
+<hr>
+<h1 id="camera-视角移动">Camera 视角移动</h1>
+<p>首先分析一下鼠标的移动对于视角的影响</p>
+<p>鼠标在屏幕的两个方向 <code>X/Y</code> 上移动<br>
+<code>X</code> 方向控制左右旋转，<code>Y</code> 方向控制上下旋转</p>
+<p>*注意，上下的视角移动限制在一定角度内<br>
+使用 <strong>Mathf.Clamp</strong> 完成</p>
+<figure data-type="image" tabindex="2"><img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503133809144.png" alt="鼠标在两个轴上移动" loading="lazy"></figure>
+<h2 id="获取鼠标的移动输入">获取鼠标的移动输入</h2>
+<p>在导航栏 <code>edit -&gt; project settings -&gt; input</code> 中查看鼠标左右移动对应的输入名称<br>
+<img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503134016932.png" alt="查看鼠标左右移动对应的输入名称" loading="lazy"><br>
+在<code>First Person Player</code>上创建脚本 <code>MouseLook.cs</code></p>
+<h2 id="camera-脚本设置">Camera 脚本设置</h2>
+<p><strong>variables 变量设置</strong></p>
+<pre><code class="language-c#">public float mouseSensitivity = 100f;
+public Transform playerBody;
+float xRotation = 0f;
+</code></pre>
+<hr>
+<p>获取鼠标的移动<br>
+<code>float mouseX = Input.GetAxis(&quot;Mouse X&quot;)</code><br>
+<code>float mouseY = Input.GetAxis(&quot;Mouse Y&quot;)</code></p>
+<p>设置鼠标灵敏度<br>
+<code>public float mouseSensitivity = 100f</code></p>
+<p>获取 <code>FirstPersonPlayer</code> 的 <code>transform</code> 组件（相机为子对象，跟随人物旋转视角 ）</p>
+<figure data-type="image" tabindex="3"><img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503134939607.png" alt="在这里插入图片描述" loading="lazy"></figure>
+<p>修改后：</p>
+<pre><code class="language-c#">float mouseX = Input.GetAxis(&quot;Mouse X&quot;) * mouseSensitivity * Time.deltaTime;
+float mouseY = Input.GetAxis(&quot;Mouse Y&quot;) * mouseSensitivity * Time.deltaTime;
+</code></pre>
+<hr>
+<h3 id="左右方向转动">左右方向转动</h3>
+<p>变量设置<br>
+<code>public Transform playerBody;</code><br>
+绑定为 <code>First Person Player</code></p>
+<p><strong>*注意</strong>，不是Camera，相机为子对象，随人物移动，不需要再移动相机</p>
+<pre><code class="language-c#">playerBody.Rotate(Vector3.up * mouseX);
+</code></pre>
+<hr>
+<h3 id="上下方向转动">上下方向转动</h3>
+<p>设置基于 <code>X</code> 轴的转动（X对应左右，Y对应垂直，Z对应前后，需要在YOZ平面移动，所以对应X）<br>
+<code>float xRotation = 0f ; //初始角度为0f</code></p>
+<pre><code class="language-c#">xRotation -= mouseY;
+xRotation = Mathf.Clamp(xRotation, -90f, 90f);// limit the angle
+transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+</code></pre>
+<hr>
+<p>设置鼠标锁定不可视的效果</p>
+<pre><code class="language-c#">void Start(){
+	Cursor.lockState = CursorLockMode.Locked;
+}
+</code></pre>
+<hr>
+<p>完整版</p>
+<pre><code class="language-c#">using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MouseLook : MonoBehaviour
+{
+
+    public float mouseSensitivity = 100f;
+
+    public Transform playerBody;
+
+    float xRotation = 0f;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        // lock and hide the cursor
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float mouseX = Input.GetAxis(&quot;Mouse X&quot;) * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis(&quot;Mouse Y&quot;) * mouseSensitivity * Time.deltaTime;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);// limit the angle
+
+        // rotate the camera within Y axis
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        // rotate the player within X axis
+        playerBody.Rotate(Vector3.up * mouseX);
+    }
+}
+</code></pre>
+<hr>
+<h1 id="playermovement-人物移动">PlayerMovement 人物移动</h1>
+<p>首先，默认方向键对应的名称及数值如下，可以在 <code>Edit -&gt; Project Settings -&gt; Input Manager</code> 中查看<br>
+<img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503135205867.png" alt="默认方向键对应的名称及数值" loading="lazy"><br>
+<code>First Person Player</code> 添加脚本 <code>PlayerMovement.cs</code></p>
+<pre><code class="language-c#">public class PlayerMovement : MonoBehaviour
+{
+    public CharacterController controller;
+
+    public float speed = 12f;
+    // Update is called once per frame
+    void Update()
+    {
+        float x = Input.GetAxis(&quot;Horizontal&quot;);
+        float z = Input.GetAxis(&quot;Vertical&quot;);
+
+        //Vector3 move = new Vector3(x, 0f, z);// × global movement, we dont want
+        Vector3 move = transform.right * x + transform.forward * z;// move along the local coordinates right and forward
+
+        controller.Move(move * speed * Time.deltaTime);
+    }
+}
+</code></pre>
+<p><strong>*注意，移动需要沿着玩家当前的位置进行移动</strong><br>
+所以需要获取当前物体的局部坐标系对应世界坐标的方向向量</p>
+<p>常用的三个：</p>
+<ul>
+<li><code>transform.right</code></li>
+<li><code>transform.forward</code></li>
+<li><code>transform.up</code></li>
+</ul>
+<pre><code class="language-c#">Vector3 move = transform.right * x + transform.forward * z;
+</code></pre>
+<hr>
+<h1 id="stairs">stairs</h1>
+<p>调整 <code>step offset</code>，代表能踏上距离地面多高范围内的台阶</p>
+<figure data-type="image" tabindex="4"><img src="D:%5CBlog%5Csource_posts%5Cpic%5C20200503135622401.png" alt="设置Step Offset" loading="lazy"></figure>
+<hr>
+<h2 id="测试">测试</h2>
+<figure data-type="image" tabindex="5"><img src="D:%5CBlog%5Csource_posts%5Cpic%5C20200503140115637.gif" alt="楼梯效果" loading="lazy"></figure>
+<hr>
+<h2 id="gravity-重力模拟">Gravity 重力模拟</h2>
+<p>重力影响下的速度和位移的曲线图<br>
+<img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503140236770.png" alt="重力影响下的速度和位移的曲线图" loading="lazy"></p>
+<hr>
+<p><strong>variables 变量设置</strong></p>
+<pre><code class="language-c#">public Transform groundCheck;
+public float groundDistance = 0.4f;// radius
+public LayerMask groundMask;
+
+bool isGrounded;
+</code></pre>
+<hr>
+<h2 id="重力对-y-方向上速度的影响">重力对 y 方向上速度的影响</h2>
+<p>在地面上我们不希望有任何 <code>y</code> 方向的速度，所以在接触地面时要清空 <code>y</code> 方向上的速度</p>
+<hr>
+<h2 id="groundcheck-用来监测地面的空对象">GroundCheck 用来监测地面的空对象</h2>
+<p>在人物的最下方，添加一个空对象，用来监测与地面距离</p>
+<figure data-type="image" tabindex="6"><img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503140405741.png" alt="GroundCheck 位置摆放" loading="lazy"></figure>
+<hr>
+<h2 id="checksphere">CheckSphere</h2>
+<p><code>Physics.CheckSphere</code> 用来监测一定距离内是否有 collider</p>
+<p>可以探测物体是否接触地面，这时候就要用到 <code>GroundCheck</code></p>
+<hr>
+<p><code>CheckSphere(position, radius, mask)</code></p>
+<blockquote>
+<p>Returns true if there are any <strong>colliders</strong> overlapping the sphere defined by <code>position</code> and <code>radius</code> in world coordinates.</p>
+</blockquote>
+<hr>
+<h3 id="ground-mask">Ground Mask</h3>
+<p>添加一个层级蒙版变量，用来检测接触到的物体是否为地面而非其他物体</p>
+<hr>
+<h4 id="添加和修改层级">添加和修改层级</h4>
+<p><img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503140616340.png" alt="添加层级" loading="lazy"><br>
+修改地面物体的层级，应用于所有子对象<br>
+<img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503140657262.png" alt="修改Ground的层级" loading="lazy"></p>
+<hr>
+<p>设置脚本的 <code>Ground Mask</code> 为 <code>Ground</code><br>
+<img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503140908896.png" alt="设置脚本的 Ground Mask" loading="lazy"></p>
+<hr>
+<h1 id="jump">Jump</h1>
+<p>最后加上跳跃的效果</p>
+<p>跳跃高度与速度的物体公式为</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi><mo>=</mo><msqrt><mrow><mn>2</mn><mi>h</mi><mi>g</mi></mrow></msqrt></mrow><annotation encoding="application/x-tex">v = \sqrt{2hg}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.24em;vertical-align:-0.25612499999999994em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.983875em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mord" style="padding-left:1em;"><span class="mord">2</span><span class="mord mathdefault">h</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span></span></span><span style="top:-2.9438750000000002em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg width='400em' height='1.28em' viewBox='0 0 400000 1296' preserveAspectRatio='xMinYMin slice'><path d='M263,681c0.7,0,18,39.7,52,119c34,79.3,68.167,
+158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120c340,-704.7,510.7,-1060.3,512,-1067
+c4.7,-7.3,11,-11,19,-11H40000v40H1012.3s-271.3,567,-271.3,567c-38.7,80.7,-84,
+175,-136,283c-52,108,-89.167,185.3,-111.5,232c-22.3,46.7,-33.8,70.3,-34.5,71
+c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1s-109,-253,-109,-253c-72.7,-168,-109.3,
+-252,-110,-252c-10.7,8,-22,16.7,-34,26c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26
+s76,-59,76,-59s76,-60,76,-60z M1001 80H40000v40H1012z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25612499999999994em;"><span></span></span></span></span></span></span></span></span></span></p>
+<p>由于设置了重力为负，所以修改为</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi><mo>=</mo><msqrt><mrow><mo>−</mo><mn>2</mn><mi>h</mi><mi>g</mi></mrow></msqrt></mrow><annotation encoding="application/x-tex">v = \sqrt{-2hg}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.24em;vertical-align:-0.25612499999999994em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.983875em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mord" style="padding-left:1em;"><span class="mord">−</span><span class="mord">2</span><span class="mord mathdefault">h</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span></span></span><span style="top:-2.9438750000000002em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg width='400em' height='1.28em' viewBox='0 0 400000 1296' preserveAspectRatio='xMinYMin slice'><path d='M263,681c0.7,0,18,39.7,52,119c34,79.3,68.167,
+158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120c340,-704.7,510.7,-1060.3,512,-1067
+c4.7,-7.3,11,-11,19,-11H40000v40H1012.3s-271.3,567,-271.3,567c-38.7,80.7,-84,
+175,-136,283c-52,108,-89.167,185.3,-111.5,232c-22.3,46.7,-33.8,70.3,-34.5,71
+c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1s-109,-253,-109,-253c-72.7,-168,-109.3,
+-252,-110,-252c-10.7,8,-22,16.7,-34,26c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26
+s76,-59,76,-59s76,-60,76,-60z M1001 80H40000v40H1012z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25612499999999994em;"><span></span></span></span></span></span></span></span></span></span></p>
+<p><strong>variables 设置变量</strong></p>
+<pre><code class="language-c#">public float jumpHight = 2f;// 跳跃高度
+</code></pre>
+<hr>
+<h2 id="脚本设置">脚本设置</h2>
+<p><strong>jump</strong></p>
+<pre><code class="language-c#">if(Input.GetButtonDown(&quot;Jump&quot;) &amp;&amp; isGrounded)
+{
+    velocity.y = Mathf.Sqrt(-2f * jumpHight * gravity);
+}
+</code></pre>
+<hr>
+<p>最后再检查一遍脚本的对象挂载<br>
+<img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503141216945.png" alt="Player Movement 的对象挂载" loading="lazy"></p>
+<hr>
+<h2 id="测试-2">测试</h2>
+<figure data-type="image" tabindex="7"><img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503141456743.gif" alt="跳跃效果测试" loading="lazy"></figure>
+<p>完成！</p>
+<hr>
+<h2 id="提升">*提升</h2>
+<p>真实情况下，一般人物在空中是无法左右移动的，所以人物在空中时，加上对左右移动的限制效果</p>
+<h3 id="限制人物空中改变方向">限制人物空中改变方向</h3>
+<p>将 <code>Vector3 move</code> 设置为类成员变量，只有接触到地面才能改变方向</p>
+<pre><code class="language-c#">float x = Input.GetAxis(&quot;Horizontal&quot;);
+float z = Input.GetAxis(&quot;Vertical&quot;);
+
+if(isGrounded)
+{
+    move = transform.right * x + transform.forward * z;
+}
+controller.Move(move * speed * Time.deltaTime);
+</code></pre>
+<hr>
+<h2 id="测试-3">测试</h2>
+<figure data-type="image" tabindex="8"><img src="https://raw.githubusercontent.com/jermyhunter/img-bed/master/img/20200503143041746.gif" alt="空中人物移动方向锁定" loading="lazy"></figure>
+<hr>
+<h1 id="小结">小结</h1>
+<p>使用 <code>CharacterController</code> 控制人物移动，需要划分 <strong>视角移动</strong> 以及 <strong>人物移动</strong></p>
+<h2 id="视角移动">视角移动</h2>
+<p>视角的上下旋转为相机的自我旋转，限定一个范围 <code>[-90,90]</code><br>
+左右旋转为人物的旋转，相机随人物旋转</p>
+<h2 id="人物移动">人物移动</h2>
+<p>人物方向移动依靠 <code>Horizontal</code> 和 <code>Vertical</code> 方向键控制<br>
+需要注意坐标轴为局部坐标轴 <code>transform.right</code> <code>transform.forward</code></p>
+<p>重力根据重力公式修改 <code>velocity.y</code> 的速度，需要检测地面，在人物底面添加 <code>CheckGround</code> 空对象来探测</p>
+<p>跳跃根据公式模拟，修改物体速度即可</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://jermyhunter.github.io/tag/Hmbxj74Nd/" class="tag">
+                    Unity
+                  </a>
+                
+                  <a href="https://jermyhunter.github.io/tag/VTBFGaX-PU/" class="tag">
+                    Game
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://jermyhunter.github.io/post/数据库  关系的完整性 - 域、实体、参照/">
+                  <h3 class="post-title">
+                    数据库 | 关系的完整性 - 域、实体、参照
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Tkinter 快速导读 | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.min.css">
+<link rel="shortcut icon" href="https://jermyhunter.github.io/favicon.ico?v=1657517722007">
+<link rel="stylesheet" href="https://jermyhunter.github.io/styles/main.css">
+
+
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="
+旧版的 Tkinter
+使用 tkinter
+新版使用 tkinter.ttk
+样式更贴合现代
+import tkinter as tk
+window
+初始化窗口
+window = tk.Tk()
+生成主窗口
+window.mainloo..." />
+    <meta name="keywords" content="Python,GUI" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://jermyhunter.github.io">
+        <img src="https://jermyhunter.github.io/images/avatar.png?v=1657517722007" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jermyhunter.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Tkinter 快速导读</h2>
+            <div class="post-date">2020-05-05</div>
+            
+            <div class="post-content" v-pre>
+              <figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/05/05/5af4w2VIeUtGiuE.png" alt="Tkinter" loading="lazy"></figure>
+<p>旧版的 Tkinter<br>
+使用 tkinter</p>
+<p>新版使用 tkinter.ttk<br>
+样式更贴合现代</p>
+<p><code>import tkinter as tk</code></p>
+<h2 id="window">window</h2>
+<p>初始化窗口</p>
+<h3 id="window-tktk">window = tk.Tk()</h3>
+<p>生成主窗口</p>
+<h3 id="windowmainloop">window.mainloop()</h3>
+<p>不断刷新窗口状态<br>
+*只有添加该条指令，窗口才可视</p>
+<h2 id="widget">widget</h2>
+<p>顾名思义，小组件<br>
+部署在主窗口内</p>
+<h3 id="常用组件及方法">常用组件及方法</h3>
+<ul>
+<li>
+<p>Label</p>
+<p>不能编辑的标签<br>
+主要用来提示</p>
+</li>
+<li>
+<p>Button</p>
+<p>可交互按钮<br>
+可触发事件</p>
+</li>
+<li>
+<p>Entry</p>
+<p>单行的文本输入</p>
+<ul>
+<li>
+<p>get()</p>
+</li>
+<li>
+<p>delete()</p>
+<ul>
+<li>
+<p>delete(pos)</p>
+</li>
+<li>
+<p>delete(start,end)</p>
+<p>从 0 开始</p>
+</li>
+<li>
+<p>delete(0,tk.END)</p>
+<p>delete ALL</p>
+</li>
+</ul>
+</li>
+<li>
+<p>insert()</p>
+<ul>
+<li>insert(pos, str)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Text</p>
+<p>多行的文本输入</p>
+<ul>
+<li>
+<p>get()</p>
+<ul>
+<li>
+<p>get(start,end)</p>
+<p>eg.<br>
+txt_content.get(0,10)<br>
+获取第1到第11个字符</p>
+<p>字符包含换行符</p>
+</li>
+</ul>
+</li>
+<li>
+<p>delete()</p>
+<ul>
+<li>delete(start,end)</li>
+</ul>
+</li>
+<li>
+<p>insert()</p>
+<ul>
+<li>insert(start,end)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Frame</p>
+<p>用来承载其他组件组织窗口</p>
+</li>
+</ul>
+<h3 id="common-attrib-共有属性">common attrib 共有属性</h3>
+<p>eg.<br>
+lbl_submit = tk.Label(master = frm_main, bg = 'black', width = 10, text = &quot;Submit&quot;)</p>
+<ul>
+<li>
+<p>master</p>
+<p>父组件</p>
+<p>eg. frm_main = tk.Frame(master=window)</p>
+</li>
+<li>
+<p>bg</p>
+</li>
+<li>
+<p>fg</p>
+</li>
+<li>
+<p>width</p>
+<p>单位为 pixel 像素</p>
+</li>
+<li>
+<p>height</p>
+</li>
+<li>
+<p>borderwidth</p>
+<p>tk.FLAT<br>
+tk.SUNKEN<br>
+tk.RAISED<br>
+tk.GROOVE<br>
+tk.RIDGE</p>
+<p>显示样式</p>
+<p>可以用下面的字典来快速引用<br>
+border_effects = {<br>
+  &quot;flat&quot;: tk.FLAT,<br>
+  &quot;sunken&quot;: tk.SUNKEN,<br>
+  &quot;raised&quot;: tk.RAISED,<br>
+  &quot;groove&quot;: tk.GROOVE,<br>
+  &quot;ridge&quot;: tk.RIDGE,<br>
+}<br>
+eg. frm_main = tk.Frame(master=window, relief=border_effects[&quot;flat&quot;])</p>
+</li>
+<li>
+<p>text</p>
+<p>eg.</p>
+<p>btn_submit[&quot;text&quot;] = &quot;Submit&quot;</p>
+</li>
+<li>
+<p>image</p>
+</li>
+</ul>
+<h2 id="layout">Layout</h2>
+<p>生成的 widget 调用<br>
+合并到设置好的 master 上</p>
+<p>*除了主窗口，其他组件都需要使用</p>
+<h3 id="pack">.pack()</h3>
+<ul>
+<li>
+<p>ipadx/y=</p>
+<p>内部间隔<br>
+eg. ipadx = 10, ipady = 10<br>
+内部的间隔各为10px</p>
+</li>
+<li>
+<p>padx/y=</p>
+</li>
+<li>
+<p>side=</p>
+<p>tk.LEFT/RIGHT/TOP/BOTTOM</p>
+<p>当前的 widget 具体停靠在那边</p>
+</li>
+<li>
+<p>fill=</p>
+<p>tk.X/Y/BOTH</p>
+<p>在 X / Y / BOTH 方向上扩展</p>
+</li>
+<li>
+<p>expand=</p>
+<p>True/False</p>
+<p>是否随着窗口大小变化而变化</p>
+</li>
+</ul>
+<h3 id="grid">.grid()</h3>
+<ul>
+<li>
+<p>row=</p>
+<p>widget 所在行号，从0开始</p>
+</li>
+<li>
+<p>column=</p>
+<p>widget 所在列号，从0开始</p>
+</li>
+<li>
+<p>sticky=</p>
+<p>&quot;n&quot; &quot;e&quot; &quot;s&quot; &quot;w&quot;<br>
+可自由组合</p>
+<p>eg.<br>
+btn_submit.grid(sticky=&quot;ne&quot;)<br>
+靠东北方</p>
+</li>
+</ul>
+<h2 id="event">Event</h2>
+<p>原理为每次 mainloop() 检查是否触发了事件</p>
+<h3 id="bind">bind()</h3>
+<p>全局事件</p>
+<ul>
+<li>
+<p>两个必备参数</p>
+<ul>
+<li>
+<p>event</p>
+<p>事件名称，内置事件<br>
+所有 event 的参考网址：<br>
+https://effbot.org/tkinterbook/tkinter-events-and-bindings.htm</p>
+</li>
+<li>
+<p>event handler</p>
+<p>函数，参数为 event</p>
+<p>eg.<br>
+def function(event):<br>
+....</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="command">command=</h3>
+<p>和按钮等绑定，单击触发</p>
+<p>eg.<br>
+def Print():<br>
+print(btn_print[&quot;text])</p>
+<p>btn_print = tk.Button(master=window, text=&quot;Hello World!&quot;, command=Print)</p>
+<p>点击按钮，输出按钮的 text 属性</p>
+<ul>
+<li>button</li>
+<li>event handler</li>
+</ul>
+<p><em>XMind: ZEN - Trial Version</em></p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://jermyhunter.github.io/tag/OApeoi0vQe/" class="tag">
+                    Python
+                  </a>
+                
+                  <a href="https://jermyhunter.github.io/tag/9OQq_oJrig/" class="tag">
+                    GUI
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://jermyhunter.github.io/post/Unity  FPS character controller 第一人称视角的人物控制/">
+                  <h3 class="post-title">
+                    Unity | FPS character controller 第一人称视角的人物控制
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
